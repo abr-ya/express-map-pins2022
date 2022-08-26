@@ -2,6 +2,10 @@ const express = require("express");
 const mongoose = require("mongoose");
 const dotenv = require("dotenv");
 
+const homeRoute = require("./routes/home");
+// const userRoute = require("./routes/users");
+const pinRoute = require("./routes/pins");
+
 dotenv.config();
 
 const app = express();
@@ -17,8 +21,9 @@ mongoose.connect(mongo_url, mongo_opt)
   .then(() => console.log("MongoDB connected!"))
   .catch(err => console.log(`MongoDB connection error: ${err}`));
 
+app.use("/", homeRoute);
 // app.use("/api/users", userRoute);
-// app.use("/api/pins", pinRoute);
+app.use("/api/pins", pinRoute);
 
 app.listen(8800, () => {
   console.log("Backend server is running!");
