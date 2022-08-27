@@ -1,4 +1,5 @@
 const express = require("express");
+const cors = require("cors");
 const mongoose = require("mongoose");
 const dotenv = require("dotenv");
 
@@ -7,8 +8,10 @@ const userRoute = require("./routes/users");
 const pinRoute = require("./routes/pins");
 
 dotenv.config();
+const FRONT_LIST = [process.env.FRONT1, process.env.FRONT2, process.env.FRONT3]
 
 const app = express();
+app.use(cors({ origin: FRONT_LIST, credentials: true }));
 app.use(express.json());
 
 const mongo_url = `mongodb+srv://${process.env.MONGO_USER}:${process.env.MONGO_PASS}@cluster0.bxtlkqg.mongodb.net/?retryWrites=true&w=majority`;
