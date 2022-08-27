@@ -3,7 +3,7 @@ const mongoose = require("mongoose");
 const dotenv = require("dotenv");
 
 const homeRoute = require("./routes/home");
-// const userRoute = require("./routes/users");
+const userRoute = require("./routes/users");
 const pinRoute = require("./routes/pins");
 
 dotenv.config();
@@ -22,7 +22,7 @@ mongoose.connect(mongo_url, mongo_opt)
   .catch(err => console.log(`MongoDB connection error: ${err}`));
 
 app.use("/", homeRoute);
-// app.use("/api/users", userRoute);
+app.use("/api/users", userRoute);
 app.use("/api/pins", pinRoute);
 
 app.listen(8800, () => {
